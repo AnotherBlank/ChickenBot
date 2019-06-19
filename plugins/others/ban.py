@@ -5,7 +5,7 @@ from plugins.others.tools import to_number
 
 
 @on_command('sleep', aliases='管理员我要睡觉', only_to_me=False)
-async def ban(session: CommandSession):
+async def sleep(session: CommandSession):
     group_id = session.ctx['group_id']
     duration = random.randint(1, 12) * 60
     await session.bot.set_group_ban(group_id=group_id,
