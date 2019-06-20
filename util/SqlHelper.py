@@ -30,8 +30,15 @@ class SqlHelper:
         self.conn.commit()
 
     # 查询用户签到和被封禁信息
-    def selectUserInfo(self,userId):
+    def selectUserInfo(self, userId):
         sql = 'SELECT * FROM user_info WHERE User_Id = ' + str(userId)
         self.cursor.execute(sql)
         values = self.cursor.fetchone()
         return values
+
+    # 增加用户的sleep时间
+    def addUserSleep(self, userId, number):
+        sql = 'UPDATE user_info SET User_Sleep = User_Sleep + ' + str(number) + ' WHERE User_Id = ' + str(userId)
+        self.cursor.execute(sql)
+        self.conn.commit()
+

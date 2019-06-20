@@ -2,14 +2,18 @@
 from nonebot import CommandSession, on_command
 import random
 from plugins.others.tools import to_number
+from util.SqlHelper import SqlHelper
 
 
 @on_command('sleep', aliases='管理员我要睡觉', only_to_me=False)
 async def sleep(session: CommandSession):
     group_id = session.ctx['group_id']
+    user_id = session.ctx['sender']['user_id']
     duration = random.randint(1, 12) * 60 * 60
+    sqlHelper = SqlHelper()
+    sqlHelper.addUserSleep(user_id, duration)
     await session.bot.set_group_ban(group_id=group_id,
-                                    user_id=session.ctx['sender']['user_id'],
+                                    user_id=user_id,
                                     duration=duration)
 
 
