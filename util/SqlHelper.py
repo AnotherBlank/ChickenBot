@@ -23,9 +23,15 @@ class SqlHelper:
         self.cursor.execute(sql)
         self.conn.commit()
 
+    # 更新用户昵称
+    def updateUserNickName(self,userId,nickName):
+        sql = 'UPDATE user_info SET User_NickName = ' + str(nickName) + 'WHERE User_Id =' + str(userId)
+        self.cursor.execute(sql)
+        self.conn.commit()
+
     # 添加新用户
-    def addNewUser(self, userId):
-        sql = 'INSERT INTO user_info VALUE (' + str(userId) + ',1,0,1)'
+    def addNewUser(self, userId, groupId, nickName):
+        sql = 'INSERT INTO user_info VALUE (' + str(userId) + ',1,0,1,' + str(groupId) + str(nickName) + ')'
         self.cursor.execute(sql)
         self.conn.commit()
 
@@ -42,3 +48,9 @@ class SqlHelper:
         self.cursor.execute(sql)
         self.conn.commit()
 
+    # 查看sleep排行
+    def selectUserSleepRank(self,group_id):
+        sql = 'SELECT User_Id,User_NickName,User_SignedToday FROM user_info WHERE Group_id = ' + str(group_id) + 'ORDER BY User_Sleep DESC '
+        self.cursor.execute(sql)
+        values = self.cursor.fetchall()
+        return values
