@@ -31,3 +31,31 @@ class NormalLightShipData:
         else:
             # 普通
             return '☆☆☆☆[普通]' + self.normalLightShip[random.randint(0, 22)]
+
+
+class HeavyShipData:
+    normalHeavyShip = ['彭萨科拉', '内华达', '俄克拉荷马', '青叶', '衣笠']
+    rareHeavyShip = ['北安普顿', '芝加哥', '波特兰', '宾夕法尼亚', '田纳西', '加利福尼亚', '什罗普郡', '肯特‌', '萨福克', '诺福克', '反击', '伊势', '日向',
+                     '苏塞克斯']
+    eliteHeavyShip = ['休斯敦‌', '印第安纳波利斯', '威奇塔‌', '亚利桑那', '爱丁堡', '伦敦', '多塞特郡', '约克‌', '埃克塞特', '声望‌', '伊丽莎白女王', '纳尔逊',
+                      '罗德尼', '黑暗界', '恐怖', '德意志', '斯佩伯爵海军上将', '阿贝克隆比']
+    superRareHeavyShip = ['贝尔法斯特', '胡德', '厌战', '威尔士亲王', '高雄', '爱宕‌', '欧根亲王', '约克公爵']
+
+    # 超稀有 7%  8搜 -> [1-700]
+    # 精锐  12% 18搜 -> [701-1900]
+    # 稀有  51% 14搜 -> [1901-7000]
+    # 普通  30% 5搜 -> [7001-10000]
+    def singleDrawing(self):
+        randomResult = random.randint(1, 10000)
+        if randomResult <= 700:
+            # 超稀有
+            return '★★★★★★【超稀有】' + self.superRareHeavyShip[random.randint(0, 7)]
+        elif randomResult <= 1900:
+            # 精锐
+            return '★★★★★【精锐】' + self.eliteHeavyShip[random.randint(0, 17)]
+        elif randomResult <= 4500:
+            # 稀有
+            return '☆☆☆☆☆[稀有]' + self.rareHeavyShip[random.randint(0, 13)]
+        else:
+            # 普通
+            return '☆☆☆☆[普通]' + self.normalHeavyShip[random.randint(0, 4)]
