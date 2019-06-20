@@ -20,3 +20,9 @@ async def draw(session: CommandSession):
     elif randomResult == 5:
         result = '大吉'
     await session.send(nickname + '今天抽的是: ' + result)
+
+
+@on_command('jrrp', aliases='今日人品', only_to_me=False)
+async def jrrp(session: CommandSession):
+    nickname = session.ctx['sender']['nickname']
+    await session.send(nickname + '今天的人品值是: ' + str(random.randint(1, 100)))
