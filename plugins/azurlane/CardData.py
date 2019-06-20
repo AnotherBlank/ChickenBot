@@ -24,7 +24,7 @@ class NormalLightShipData:
             return '★★★★★★【超稀有】' + self.superRareLightShip[random.randint(0, 5)]
         elif randomResult <= 1900:
             # 精锐
-            return '★★★★★【精锐】' + self.eliteLightShip[random.randint(0, 34)]
+            return '★★★★★【精锐】' + self.eliteLightShip[random.randint(0, 23)]
         elif randomResult <= 4500:
             # 稀有
             return '☆☆☆☆☆[稀有]' + self.rareLightShip[random.randint(0, 34)]
