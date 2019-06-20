@@ -1,1 +1,2 @@
-from plugins.others import ban, LuckTest, tools
+from plugins.others import ban, LuckTest, tools, SignIn
+
