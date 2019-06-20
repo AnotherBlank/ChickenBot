@@ -1,6 +1,6 @@
-import nonebot
 import random
-
+import re
+import nonebot
 
 def collect_repeat_info(group, msg):
     if group not in msgDict.keys():
@@ -52,8 +52,17 @@ async def repeat(context):
     group = context['group_id']
     msg = str(context['message'])
     collect_repeat_info(group, msg)
+
+    # 看到指令直接return重来
+    match = re.match(r'/.+', msg)
+    if match:
+        return
+    # 有复读指令的BUG，这里就先放了
     if msgDict[group]['num'] in [3]:
         await bot.send(context, msg)
     elif msgDict[group]['num'] in [6, 12, 18, 24, 36]:
         msg = message[random.randint(0, len(message)-1)]
         await bot.send(context, msg)
+    # if msgDict[group]['num'] in [6, 12, 18, 24, 36]:
+    #     msg = message[random.randint(0, len(message) - 1)]
+    #     await bot.send(context, msg)
