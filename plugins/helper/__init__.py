@@ -14,6 +14,7 @@ async def help(session: CommandSession):
                        'azlightten——舰B轻型建建造\nazheavy | azheavyten——舰b重型舰建造\nazspecial | '
                        'azspecialten——舰b特型舰建造\njrrp——人品\ndraw——抽签\nhelp——帮助\nwhoami '
                        '——我是谁\nsleep——禁言礼包\nsign | 签到——签到功能 签到后可享受精致睡眠在线记录 (被选中的人会出现BUG)\nsleeprank——精致睡眠排行榜\n'
+                       'roll——投掷骰子，支持xdy式骰子(/roll 1d20),默认为1d100\n'
                        'study——语言学习指令，后面可以接一个问题的参数(/study 问题),私聊专属')
 
 
