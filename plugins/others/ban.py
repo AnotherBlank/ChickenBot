@@ -1,7 +1,9 @@
 # 禁言相关插件
 from nonebot import CommandSession, on_command
 import random
-from plugins.others.tools import to_number
+
+from nonebot.permission import GROUP
+
 from util.SqlHelper import SqlHelper
 
 from nonebot.log import logger
@@ -20,7 +22,8 @@ async def sleep(session: CommandSession):
                                     user_id=user_id,
                                     duration=duration)
 
-@on_command('sleeprank', aliases=['睡眠排行'], only_to_me=False)
+
+@on_command('sleeprank', aliases=['睡眠排行'], permission=GROUP, only_to_me=False)
 async def sleeprank(session: CommandSession):
     sqlHelper = SqlHelper()
     group_id = session.ctx['group_id']
