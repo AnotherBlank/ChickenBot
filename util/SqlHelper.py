@@ -69,3 +69,10 @@ class SqlHelper:
         self.cursor.execute(sql)
         values = self.cursor.fetchall()
         return values
+
+    # 查询群用问答句
+    def selectQuestionForGroup(self, question):
+        sql = 'SELECT * FROM Bot_Speak_Official WHERE Question =' + '\'' + str(question) + '\''
+        self.cursor.execute(sql)
+        values = self.cursor.fetchall()
+        return values

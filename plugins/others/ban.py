@@ -18,6 +18,7 @@ async def sleep(session: CommandSession):
     sqlHelper = SqlHelper()
     sqlHelper.addUserSleep(user_id, duration / 3600)
     sqlHelper.updateUserNickName(user_id, nickname)
+    await session.send('晚安哦' + nickname)
     await session.bot.set_group_ban(group_id=group_id,
                                     user_id=user_id,
                                     duration=duration)
