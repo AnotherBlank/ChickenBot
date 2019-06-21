@@ -21,7 +21,7 @@ async def sign(session: CommandSession):
         else:
             sqlHelper.updateUserSign(user_id)
             sqlHelper.updateUserNickName(user_id, nickname)
-            await session.send('签到成功！' + nickname + '已经累计签到' + str(values[1]) + '天!')
+            await session.send('签到成功！' + nickname + '已经累计签到' + str(values[1] + 1) + '天!')
     else:
         await session.send('看起来' + nickname + '是第一次签到呢')
         sqlHelper.addNewUser(user_id, group_id, nickname)
