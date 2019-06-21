@@ -24,7 +24,7 @@ class SqlHelper:
         self.conn.commit()
 
     # 更新用户昵称
-    def updateUserNickName(self,userId,nickName):
+    def updateUserNickName(self, userId, nickName):
         sql = 'UPDATE user_info SET User_NickName = \'' + str(nickName) + '\'WHERE User_Id =' + str(userId)
         self.cursor.execute(sql)
         self.conn.commit()
@@ -49,9 +49,23 @@ class SqlHelper:
         self.conn.commit()
 
     # 查看sleep排行
-    # TODO 有BUG，到时候再说
     def selectUserSleepRank(self, groupId):
-        sql = 'SELECT User_Id,User_NickName,User_SignedToday FROM user_info WHERE Group_id = ' + str(groupId) + 'ORDER BY User_Sleep DESC '
+        sql = 'SELECT User_Id,User_NickName,User_Sleep FROM user_info WHERE Group_id = ' +'\'' + str(
+            groupId) +'\''+ 'ORDER BY User_Sleep DESC '
+        self.cursor.execute(sql)
+        values = self.cursor.fetchall()
+        return values
+
+    # 添加问答句
+    def insertQuestionAndAnswer(self, question, answer, userId):
+        sql = 'INSERT INTO bot_speak(Question, Answer, Create_Id) values (\'' + str(question) + '\',\'' + str(
+            answer) + '\',' + str(userId) + ')'
+        self.cursor.execute(sql)
+        self.conn.commit()
+
+    # 查询问答句
+    def selectQuestion(self, question):
+        sql = 'SELECT * FROM bot_speak WHERE Question =' + '\'' + str(question) + '\''
         self.cursor.execute(sql)
         values = self.cursor.fetchall()
         return values

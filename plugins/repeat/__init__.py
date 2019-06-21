@@ -66,3 +66,4 @@ async def repeat(context):
     # if msgDict[group]['num'] in [6, 12, 18, 24, 36]:
     #     msg = message[random.randint(0, len(message) - 1)]
     #     await bot.send(context, msg)
+
