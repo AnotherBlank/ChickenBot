@@ -83,7 +83,7 @@ class SpecialShipData:
             return '★★★★★【精锐】' + self.eliteSpecialShip[random.randint(0, 17)]
         elif randomResult <= 4500:
             # 稀有
-            return '☆☆☆☆☆[稀有]' + self.rareSpecialShip[random.randint(0, 7]
+            return '☆☆☆☆☆[稀有]' + self.rareSpecialShip[random.randint(0, 7)]
         else:
             # 普通
             return '☆☆☆☆[普通]' + self.normalSpecialShip[random.randint(0, 4)]
