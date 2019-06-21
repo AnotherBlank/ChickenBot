@@ -10,9 +10,9 @@ async def sleep(session: CommandSession):
     group_id = session.ctx['group_id']
     user_id = session.ctx['sender']['user_id']
     nickname = session.ctx['sender']['nickname']
-    duration = random.randint(1, 12) * 60 * 60
+    duration = random.randint(1, 12) * 3600
     sqlHelper = SqlHelper()
-    sqlHelper.addUserSleep(user_id, duration)
+    sqlHelper.addUserSleep(user_id, duration / 3600)
     sqlHelper.updateUserNickName(user_id, nickname)
     await session.bot.set_group_ban(group_id=group_id,
                                     user_id=user_id,

@@ -25,7 +25,7 @@ class StaffData:
             randomResult = random.randint(1, 10000)
             # 判断是否抽到了up干员
             if randomResult <= 5000:
-                return '【★★★★★★UP!】——' + self.sixListUp[random.randint(0, 2)]
+                return '【★★★★★★UP!】——' + self.sixListUp[random.randint(0, 1)]
             else:
                 return '【★★★★★★】——' + self.sixList[random.randint(0, 8)]
         elif randomResult <= 1000:
