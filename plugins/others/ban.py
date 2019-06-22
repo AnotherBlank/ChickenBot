@@ -21,7 +21,7 @@ async def sleep(session: CommandSession):
     if role == 'admin' or role == 'owner':
         session.finish('emmmmm我好像没有办法哄你睡觉呢')
     else:
-        duration = random.randint(1, 12) * 3600
+        duration = random.randint(1, 24) * 3600
         sqlHelper = SqlHelper()
         sqlHelper.addUserSleep(user_id, duration / 3600)
         sqlHelper.updateUserNickName(user_id, nickname)
