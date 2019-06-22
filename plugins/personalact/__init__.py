@@ -2,6 +2,7 @@
 from typing import Optional
 
 from nonebot import *
+from nonebot import logger
 from nonebot.helpers import render_expression
 from nonebot.permission import PRIVATE, GROUP
 import random
@@ -23,9 +24,14 @@ EXPR_DONT_UNDERSTAND = (
 
 @on_command('study', permission=GROUP | PRIVATE, only_to_me=False)
 async def study(session: CommandSession):
-    # 加一个限定
-    if session.ctx['group_id'] != 572013667:
-        return
+    message_type = session.ctx['message_type']
+    if message_type == 'group':
+        group_id = session.ctx['group_id']
+        logger.error('---------------------------group_id' + str(group_id))
+        # 加一个限定
+        if group_id != 572013667:
+            await session.send('主人好像不允许我在这里学习呢...')
+            return
     question = session.state.get('question')  # 从会话状态里尝试获取
     if question is None:
         question = session.get('question', prompt='你需要我学习应答什么句子？', at_sender=True)
