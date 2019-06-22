@@ -84,6 +84,7 @@ async def call_response(text: str, number: int) -> Optional[str]:
         values = sqlHelper.selectQuestion(text)
     else:
         values = sqlHelper.selectQuestionForGroup(text)
+    logger.debug('------------------values:' + str(values))
     randomresult = 0
 
     # 如果不存在
@@ -97,7 +98,7 @@ async def call_response(text: str, number: int) -> Optional[str]:
 
 
 # -------------这是群聊部分
-@on_natural_language(permission=GROUP,only_to_me=False)
+@on_natural_language(permission=GROUP, only_to_me=False)
 async def _(session: NLPSession):
     return IntentCommand(60, 'justspeakgroup', args={'message': session.msg_text})
 

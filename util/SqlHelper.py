@@ -19,7 +19,7 @@ class SqlHelper:
 
     # 签到用的方法，给User_Sign+1
     def updateUserSign(self, userId):
-        sql = 'UPDATE user_info SET User_Sign = User_Sign + 1 WHERE User_Id = ' + str(userId)
+        sql = 'UPDATE user_info SET User_Sign = User_Sign + 1,User_SignedToday = 1 WHERE User_Id = ' + str(userId)
         self.cursor.execute(sql)
         self.conn.commit()
 
@@ -31,7 +31,8 @@ class SqlHelper:
 
     # 添加新用户
     def addNewUser(self, userId, groupId, nickName):
-        sql = 'INSERT INTO user_info VALUE (' + str(userId) + ',1,0,1,' + str(groupId) + '\'' + str(nickName) + '\')'
+        # sql = 'INSERT INTO user_info VALUE (' + str(userId) + ',1,0,1,' + str(groupId) + '\'' + str(nickName) + '\')'
+        sql = 'INSERT INTO user_info VALUES (' + str(userId) + ',1,0,1,' + str(groupId) + ',\'' + str(nickName) + '\')'
         self.cursor.execute(sql)
         self.conn.commit()
 
@@ -50,8 +51,8 @@ class SqlHelper:
 
     # 查看sleep排行
     def selectUserSleepRank(self, groupId):
-        sql = 'SELECT User_Id,User_NickName,User_Sleep FROM user_info WHERE Group_id = ' +'\'' + str(
-            groupId) +'\''+ 'ORDER BY User_Sleep DESC '
+        sql = 'SELECT User_Id,User_NickName,User_Sleep FROM user_info WHERE Group_id = ' + '\'' + str(
+            groupId) + '\'' + 'ORDER BY User_Sleep DESC '
         self.cursor.execute(sql)
         values = self.cursor.fetchall()
         return values
