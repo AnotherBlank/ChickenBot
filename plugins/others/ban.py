@@ -14,14 +14,21 @@ async def sleep(session: CommandSession):
     group_id = session.ctx['group_id']
     user_id = session.ctx['sender']['user_id']
     nickname = session.ctx['sender']['nickname']
-    duration = random.randint(1, 12) * 3600
-    sqlHelper = SqlHelper()
-    sqlHelper.addUserSleep(user_id, duration / 3600)
-    sqlHelper.updateUserNickName(user_id, nickname)
-    await session.send('晚安哦' + nickname)
-    await session.bot.set_group_ban(group_id=group_id,
-                                    user_id=user_id,
-                                    duration=duration)
+    role = session.ctx['sender']['role']
+    logger.debug('----------------------role=' + str(role))
+
+    # 如果是管理员
+    if role == 'admin' or role == 'owner':
+        session.finish('emmmmm我好像没有办法哄你睡觉呢')
+    else:
+        duration = random.randint(1, 12) * 3600
+        sqlHelper = SqlHelper()
+        sqlHelper.addUserSleep(user_id, duration / 3600)
+        sqlHelper.updateUserNickName(user_id, nickname)
+        await session.send('晚安哦' + nickname)
+        await session.bot.set_group_ban(group_id=group_id,
+                                        user_id=user_id,
+                                        duration=duration)
 
 
 @on_command('sleeprank', aliases=['睡眠排行'], permission=GROUP, only_to_me=False)
@@ -33,6 +40,8 @@ async def sleeprank(session: CommandSession):
     logger.error(values)
     if not values:
         await session.send('这个群还没有人使用这个功能哦')
+    elif len(values) <= 3:
+        await session.send('至少三个人使用sign指令才能用哦')
     else:
         await session.send('本群睡眠排行榜：\n' +
                            '冠军: ' + values[0][1] + '(' + str(values[0][0]) + ')  ' + str(values[0][2]) + '小时\n' +
