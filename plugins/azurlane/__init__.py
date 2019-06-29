@@ -2,7 +2,7 @@
 from nonebot import on_command, CommandSession
 from nonebot.permission import GROUP, PRIVATE_GROUP
 
-from plugins.azurlane.CardData import NormalLightShipData, HeavyShipData, SpecialShipData
+from plugins.azurlane.CardData import NormalLightShipData, HeavyShipData, SpecialShipData, MNFLeMalinSpecialData
 
 
 @on_command('azlight', aliases=['轻型舰建造'], permission=GROUP | PRIVATE_GROUP, only_to_me=False)
@@ -60,3 +60,22 @@ async def azurTenHeavy(session: CommandSession):
                        data.singleDrawing() + '\n' + data.singleDrawing() + '\n' +
                        data.singleDrawing() + '\n' + data.singleDrawing() + '\n' +
                        data.singleDrawing() + '\n')
+
+
+@on_command('azlimit', aliases=['限时舰建造'], permission=GROUP | PRIVATE_GROUP, only_to_me=False)
+async def azurOneLimit(session: CommandSession):
+    data = MNFLeMalinSpecialData()
+    nickname = session.ctx['sender']['nickname']
+    await session.send(nickname + '建造出: ' + data.singleDrawing())
+
+
+@on_command('azlimitten', aliases=['限时舰十连'], permission=GROUP | PRIVATE_GROUP, only_to_me=False)
+async def azurTenLimit(session: CommandSession):
+    data = MNFLeMalinSpecialData()
+    nickname = session.ctx['sender']['nickname']
+    await session.send(nickname + '的[限时上头建造]十连结果：\n' + data.singleDrawing() + '\n' +
+                       data.singleDrawing() + '\n' + data.singleDrawing() + '\n' +
+                       data.singleDrawing() + '\n' + data.singleDrawing() + '\n' +
+                       data.singleDrawing() + '\n' + data.singleDrawing() + '\n' +
+                       data.singleDrawing() + '\n' + data.singleDrawing() + '\n' +
+                       data.singleDrawing())

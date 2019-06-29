@@ -87,3 +87,48 @@ class SpecialShipData:
         else:
             # 普通
             return '☆☆☆☆[普通]' + self.normalSpecialShip[random.randint(0, 4)]
+
+
+# 限时建造
+class MNFLeMalinSpecialData:
+    # 特殊概率：恶毒2% 让巴尔，马萨诸塞1.8%
+    mNFLeMalinSpecialOnepointEight = ['让·巴尔', '马萨诸塞']
+    mNFLeMalinSpecialTwoPointFive = ['倔强‌', '敦刻尔克‌', '絮库夫']
+
+    # 超稀有 7%  -> [1-700]
+    # 精锐  12%  -> [701-1900]
+    # 稀有  51%  -> [1901-7000]
+    # 普通  30%  -> [7001-10000]
+    # 特殊 11.3% -> [1-1130]
+    def singleDrawing(self):
+        randomResult = random.randint(1, 10000)
+        if randomResult <= 1130:
+            # 特殊建造
+            randomResult = random.randint(1, 11300)
+            # 恶毒                2%   -> [1,2000]
+            # 让·巴尔 马萨诸塞     1.8% -> [2001,3800]
+            # 倔强,敦刻尔克,絮库夫 2.5% -> [3801, 6300]
+            # 福尔班              5%   -> [6301，11300]
+            if randomResult <= 2000:
+                return '★★★★★★【超稀有UP!】恶毒'
+            elif randomResult <= 3800:
+                return '★★★★★★【超稀有UP!】' + self.mNFLeMalinSpecialOnepointEight[random.randint(0, 1)]
+            elif randomResult <= 6300:
+                return '★★★★★【精锐UP!】' + self.mNFLeMalinSpecialTwoPointFive[random.randint(0, 2)]
+            elif randomResult <= 11300:
+                return '☆☆☆☆☆[稀有UP!]福尔班'
+        else:
+            # 普通建造
+            randomResult = random.randint(1, 10000)
+            if randomResult <= 700:
+                # 超稀有
+                return '★★★★★★【超稀有】非限时船'
+            elif randomResult <= 1900:
+                # 精锐
+                return '★★★★★【精锐】非限时船'
+            elif randomResult <= 4500:
+                # 稀有
+                return '☆☆☆☆☆[稀有]非限时船'
+            else:
+                # 普通
+                return '☆☆☆☆[普通]非限时船'
