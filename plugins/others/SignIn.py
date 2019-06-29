@@ -1,5 +1,5 @@
 # 签到系统
-from nonebot import CommandSession, on_command
+from nonebot import CommandSession, on_command, logger
 from nonebot.permission import GROUP, PRIVATE_GROUP
 import mysql.connector
 
@@ -15,6 +15,7 @@ async def sign(session: CommandSession):
     judge = sqlHelper.selectUserId(user_id)
     if judge is True:
         values = sqlHelper.selectUserInfo(user_id)
+        logger.error('---------------values是' + str(values))
         # 判断是否已经签到了
         if values[3] == 1:
             await session.send('一天不能签到两次哦！')

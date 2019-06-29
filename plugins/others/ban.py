@@ -9,7 +9,7 @@ from util.SqlHelper import SqlHelper
 from nonebot.log import logger
 
 
-@on_command('sleep', aliases='管理员我要睡觉', only_to_me=False)
+@on_command('sleep', aliases=['十一姬我要睡觉', '我想睡觉', '我要睡觉'], only_to_me=False)
 async def sleep(session: CommandSession):
     group_id = session.ctx['group_id']
     user_id = session.ctx['sender']['user_id']
